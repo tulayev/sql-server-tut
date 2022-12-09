@@ -3,7 +3,9 @@ GO
 
 
 -- INNER JOIN
--- Write a query to return the following attributes for employees who belong to a department:
+/*
+Write a query to return the following attributes for employees who belong to a department:
+*/
 
 SELECT 
 	e.employee_id, 
@@ -17,7 +19,9 @@ ON d.department_id = e.department_id;
 
 
 -- LEFT JOIN 
--- Write a query to return the following attributes for all employees, including employees who do not belong to a department:
+/* 
+Write a query to return the following attributes for all employees, including employees who do not belong to a department:
+*/
 
 SELECT 
 	e.employee_id, 
@@ -31,8 +35,10 @@ ON d.department_id = e.department_id;
 
 
 -- LEFT JOIN
--- Write a query to return the total number of employees in each department. Include the department_name in the 
--- query result. Also, include employees who have not been assigned to a department
+/* 
+Write a query to return the total number of employees in each department. Include the department_name in the 
+query result. Also, include employees who have not been assigned to a department
+*/
 
 SELECT 
 	d.department_name,
@@ -44,7 +50,10 @@ GROUP BY d.department_name;
 
 
 -- Self referencing JOIN
--- Write a query to return employee details for all employees as well as the first and last name of each employee's manager. Include the following columns:
+/* 
+Write a query to return employee details for all employees as well as the first and last name of each employee's manager. 
+Include the following columns:
+*/
 
 SELECT 
 	e.employee_id, 
@@ -58,7 +67,9 @@ ON e.manager_id = m.employee_id;
 
 
 -- Multiple tables JOIN
--- Write a query to return all the products at each warehouse. Include the following attributes:
+/* 
+Write a query to return all the products at each warehouse. Include the following attributes:
+*/
 
 SELECT 
 	p.product_id, 
@@ -74,7 +85,9 @@ ON i.warehouse_id = w.warehouse_id;
 
 
 -- Multiple tables JOIN
--- Write a query to return the following attributes for all employees from Australia.
+/* 
+Write a query to return the following attributes for all employees from Australia.
+*/
 
 SELECT 
 	e.employee_id, 
@@ -94,9 +107,12 @@ ON e.country_id = c.country_id
 WHERE c.country_name = 'Australia';
 
 
--- Return the total quantity ordered of each product in each category. Do not include products which have never been
--- ordered. Include the product name and category name in the query. Order the results by category name from A to Z and
--- then within each category name order by product name from A to Z.
+-- Multiple tables JOIN
+/*
+Return the total quantity ordered of each product in each category. Do not include products which have never been
+ordered. Include the product name and category name in the query. Order the results by category name from A to Z and
+then within each category name order by product name from A to Z.
+*/
 
 SELECT 
 	p.product_name, 
@@ -111,10 +127,12 @@ GROUP BY p.product_name, c.category_name
 ORDER BY c.category_name, p.product_name;
 
 
-
--- Return the total quantity ordered of each product in each category. Include products which have never been ordered and
--- give these a total quantity ordered of 0. Include the product name and category name in the query. Order the results by category
--- name from A to Z and then within each category name order by product name from A to Z.
+-- Multiple tables JOIN
+/*
+Return the total quantity ordered of each product in each category. Include products which have never been ordered and
+give these a total quantity ordered of 0. Include the product name and category name in the query. Order the results by category
+name from A to Z and then within each category name order by product name from A to Z.
+*/
 
 SELECT 
 	p.product_name, 
