@@ -13,9 +13,10 @@ SELECT
 	list_price,
 	category_id
 FROM oes.products
-WHERE list_price = (SELECT 
-						MIN(list_price)
-					FROM oes.products);
+WHERE list_price = 
+(SELECT 
+	MIN(list_price)
+FROM oes.products);
 
 
 -- Correlated Subquery
@@ -30,10 +31,11 @@ SELECT
 	list_price,
 	category_id
 FROM oes.products p1
-WHERE list_price IN (SELECT  
-						MIN(list_price)
-					FROM oes.products p2
-					WHERE p2.category_id = p1.category_id);
+WHERE list_price IN 
+(SELECT  
+	MIN(list_price)
+FROM oes.products p2
+WHERE p2.category_id = p1.category_id);
 
 
 -- Correlated Subquery (using JOIN)
@@ -48,11 +50,12 @@ SELECT
 	p1.list_price,
 	p1.category_id
 FROM oes.products p1
-INNER JOIN (SELECT 
-				category_id,
-				MIN(list_price) AS min_price
-			FROM oes.products
-			GROUP BY category_id) p2
+INNER JOIN 
+(SELECT 
+	category_id,
+	MIN(list_price) AS min_price
+FROM oes.products
+GROUP BY category_id) p2
 ON p1.category_id = p2.category_id
 AND p1.list_price = p2.min_price;
 
@@ -106,10 +109,11 @@ SELECT
 	first_name,
 	last_name
 FROM hcm.employees
-WHERE employee_id NOT IN (SELECT 
-							employee_id 
-						  FROM oes.orders
-						  WHERE employee_id IS NOT NULL);
+WHERE employee_id NOT IN 
+(SELECT 
+	employee_id 
+FROM oes.orders
+WHERE employee_id IS NOT NULL);
 
 
 -- NOT EXISTS usage
@@ -122,9 +126,11 @@ SELECT
 	first_name,
 	last_name
 FROM hcm.employees e
-WHERE NOT EXISTS (SELECT * 
-				  FROM oes.orders o
-				  WHERE e.employee_id = o.employee_id);
+WHERE NOT EXISTS 
+(SELECT 
+	* 
+FROM oes.orders o
+WHERE e.employee_id = o.employee_id);
 
 
 -- Self-contained Subquery
@@ -144,13 +150,16 @@ JOIN oes.order_items oi
 ON oi.order_id = o.order_id
 JOIN oes.products p
 ON oi.product_id = p.product_id
-WHERE c.customer_id IN (SELECT o.customer_id
-					    FROM oes.orders o
-					    JOIN oes.order_items oi
-					    ON oi.order_id = o.order_id
-						JOIN oes.products p
-						ON oi.product_id = p.product_id
-						WHERE p.product_name = 'PBX Smart Watch 4');
+WHERE c.customer_id IN 
+(SELECT 
+	o.customer_id
+FROM oes.orders o
+JOIN oes.order_items oi
+ON oi.order_id = o.order_id
+JOIN oes.products p
+ON oi.product_id = p.product_id
+WHERE p.product_name = 'PBX Smart Watch 4');
+
 -- To see check the result is correct run the following script:
 /*
 SELECT 
